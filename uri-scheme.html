@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function () {
+    var request1 = new XMLHttpRequest();
+    request1.open('GET', 'sneaky:test1.txt');
+    request1.setRequestHeader('Access-Control-Allow-Origin', '*');
+    request1.addEventListener('load', function () {
+        document.getElementById('test1').innerHTML = request1.responseText;
+    });
+    request1.addEventListener('error', function () {
+        document.getElementById('test1').innerHTML = 'sneaky: error';
+    });
+    request1.send();
+});
+  </script>
+</head>
+<body>
+    <p id="test1"></p>
+</body>
+</html>
