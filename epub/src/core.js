@@ -32,7 +32,7 @@ EPUBJS.core.request = function(url, type, withCredentials) {
 	if(withCredentials) {
 		xhr.withCredentials = true;
 	}
-	xhr.open("GET", url, true);
+	xhr.open("GET", 'sneaky:epub/' + url, true);
 	xhr.onreadystatechange = handler;
 	
 	if(type == 'blob'){

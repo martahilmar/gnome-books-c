@@ -101,7 +101,7 @@ request_cb (WebKitURISchemeRequest *request, gpointer data)
 
     printf("Path: %s \n", path);
     if (!path || path[0] == '\0') {
-        file = g_file_new_for_path ("epub/examples/single.html");
+        file = g_file_new_for_path ("resource:///http://gnome-books/epub/examples/single.html");
         //file = g_file_new_for_uri ("resource:////org/gnome-books/epub/examples/single.HTMLl");
     } else {
         gchar *dir = g_get_current_dir ();
