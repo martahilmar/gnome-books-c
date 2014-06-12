@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="http://gnome-books">
-    <file>epub/examples/single.html</file>
+  <gresource prefix="gnome-books">
+    <file>epub.js/examples/single.html</file>
   </gresource>
 </gresources>
