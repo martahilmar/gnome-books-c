@@ -4745,7 +4745,7 @@ EPUBJS.Render.Iframe.prototype.load = function(url){
   var render = this,
       deferred = new RSVP.defer();
 
-  this.iframe.src = url;
+  this.iframe.src = 'sneaky:epub/' + url;
   console.log("this.iframe.src: " + this.iframe.src);
   //this.iframe.contentWindow.location = "sneaky:examples/single.html";
   //this.iframe.src = "sneaky:examples/single.html";
