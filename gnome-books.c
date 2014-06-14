@@ -101,7 +101,7 @@ request_cb (WebKitURISchemeRequest *request, gpointer data)
 
     printf("Path: %s \n", path);
     if (!path || path[0] == '\0') {
-        file = g_file_new_for_path ("resource:///gnome-books/epub.js/examples/single.html");
+        file = g_file_new_for_path ("epub.js/examples/single.html");
         //file = g_file_new_for_uri ("resource:////org/gnome-books/epub/examples/single.HTMLl");
     } else {
         gchar *dir = g_get_current_dir ();
@@ -129,14 +129,14 @@ register_uri ()
     WebKitWebContext *context = webkit_web_context_get_default ();
     WebKitSecurityManager *security = webkit_web_context_get_security_manager (context);
 
-    webkit_web_context_register_uri_scheme (context, "sneaky", request_cb, NULL, NULL);
-    webkit_security_manager_register_uri_scheme_as_cors_enabled (security, "sneaky");
+    webkit_web_context_register_uri_scheme (context, "book", request_cb, NULL, NULL);
+    webkit_security_manager_register_uri_scheme_as_cors_enabled (security, "book");
 }
 
 static gboolean
 load (gpointer pointer)
 {   
-    webkit_web_view_load_uri (WEBKIT_WEB_VIEW (webView), "sneaky:");
+    webkit_web_view_load_uri (WEBKIT_WEB_VIEW (webView), "book:");
 
     return FALSE;
 }
