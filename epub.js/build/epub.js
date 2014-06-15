@@ -3672,7 +3672,9 @@ EPUBJS.core.request = function(url, type, withCredentials) {
 	if(withCredentials) {
 		xhr.withCredentials = true;
 	}
-	xhr.open("GET", url, true);
+  xhr.open("GET", 'book:epub.js' + url, true);
+  //xhr.open("GET", url, true);
+  
 	xhr.onreadystatechange = handler;
 	
 	if(type == 'blob'){
@@ -5582,7 +5584,7 @@ EPUBJS.Render.Iframe.prototype.load = function(url){
 	var render = this,
 			deferred = new RSVP.defer();
 
-	this.iframe.contentWindow.location.replace(url);
+	this.iframe.contentWindow.location.replace('book:epub.js' + url);
 	// Reset the scroll position
 	render.leftPos = 0;
 
@@ -7127,7 +7129,7 @@ EPUBJS.Unarchiver.prototype.loadLib = function(callback){
 EPUBJS.Unarchiver.prototype.openZip = function(zipUrl, callback){
 	var deferred = new RSVP.defer();
 	var zipFs = this.zipFs;
-	zipFs.importHttpContent(zipUrl, false, function() {
+	zipFs.importHttpContent('book:epub.js/' + zipUrl, false, function() {
 		deferred.resolve(zipFs);
 	}, this.failed);
 	

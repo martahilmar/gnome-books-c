@@ -9,13 +9,19 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
 
                 
-        <!-- EPUBJS Renderer -->
-        <script src="../build/epub.min.js"></script>
-        
-        <link rel="stylesheet" href="basic.css">
+        <!-- EPUBJS Renderer 
+        <script src="file:///home/marta/Dropbox/GSoC/gnome-books-v0.3/build/epub.min.js"></script>
+        -->
+
+        <script src='book:epub.js/build/epub.js'></script>
+        <script src='book:epub.js/build/libs/zip.min.js'></script>
+  
+        <link rel="stylesheet" href="book:epub.js/examples/basic.css">
 
         <style type="text/css">
-
+        <script>
+          EPUBJS.filePath = "../build/libs/";
+        </script>
           body {
             overflow: auto;
             background: #eee;
@@ -43,21 +49,17 @@
 
          
         </style>
-        
-         <script>
-            "use strict";
-            
-            var Book = ePub("../reader/moby-dick/", {
-              width: 400,
-              height: 600,
-              spreads : false
-            });
-            
-
+        <script type="text/javascript">
+          var Book = ePub("reader/moby-dick/", {                        // Running unziped book
+          //var Book = ePub("reader/moby-dick.epub", {                  // Running .epub book
+            width: 400,
+            height: 600,
+            spreads : false
+          });
         </script>
     </head>
     <body>
-        <div id="main">
+        <div id="main">        
           <div id="prev" onclick="Book.prevPage();" class="arrow">‹</div>
           <div id="wrapper">
             <div id="area"></div>
@@ -66,11 +68,9 @@
         </div>
 
         <script>            
-            
             Book.renderTo("area").then(function(){
               //Book.setStyle("width", "400px");
             });
-
         </script>
     </body>
 </html>
