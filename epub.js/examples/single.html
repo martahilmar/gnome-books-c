@@ -17,11 +17,12 @@
         <script src='book:epub.js/build/libs/zip.min.js'></script>
   
         <link rel="stylesheet" href="book:epub.js/examples/basic.css">
+        <script>
+          //EPUBJS.filePath = "../build/libs/";
+          //window.location = 'book:epub.js/';
+        </script>
 
         <style type="text/css">
-        <script>
-          EPUBJS.filePath = "../build/libs/";
-        </script>
           body {
             overflow: auto;
             background: #eee;
@@ -46,11 +47,14 @@
             box-shadow:           inset 10px 0 20px rgba(0,0,0,.1);
             padding: 40px 40px;
           }
-
-         
         </style>
+
         <script type="text/javascript">
-          var Book = ePub("reader/moby-dick/", {                        // Running unziped book
+          //window.location='book:epub.js';
+          //var httpURL= window.location.hostname + window.location.pathname;
+          //console.log(httpURL);
+
+          var Book = ePub("/epub.js/reader/moby-dick/", {           // Running unziped book
           //var Book = ePub("reader/moby-dick.epub", {                  // Running .epub book
             width: 400,
             height: 600,
@@ -67,7 +71,8 @@
           <div id="next" onclick="Book.nextPage();"class="arrow">›</div>
         </div>
 
-        <script>            
+        <script>        
+            console.log("Current URL: " + document.URL);
             Book.renderTo("area").then(function(){
               //Book.setStyle("width", "400px");
             });

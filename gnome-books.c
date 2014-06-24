@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include "book-view.h"
 
 GtkWidget *mainWindow;
 WebKitWebView *webView;
@@ -97,12 +98,15 @@ static void
 request_cb (WebKitURISchemeRequest *request, gpointer data)
 {
     const gchar *path = webkit_uri_scheme_request_get_path (request);
+    const gchar *uri = webkit_uri_scheme_request_get_uri (request);
     GFile *file;
 
     printf("Path: %s \n", path);
+    //printf("URI: %s\n",uri);
+
     if (!path || path[0] == '\0') {
         file = g_file_new_for_path ("epub.js/examples/single.html");
-        //file = g_file_new_for_uri ("resource:////org/gnome-books/epub/examples/single.HTMLl");
+        //file = g_file_new_for_uri ("resources:///gnome-books/epub/examples/single.html");
     } else {
         gchar *dir = g_get_current_dir ();
         gchar *fn = g_build_filename (dir, path, NULL);
@@ -136,9 +140,21 @@ register_uri ()
 static gboolean
 load (gpointer pointer)
 {   
+    //gchar* script = g_file_get_contents("<html><body><h1>My First Heading</h1></body></html>");
+    gchar* msg = NULL;
+    gchar* script = "<script>Book.renderTo(\"area\").then(function(){//Book.setStyle(\"width\", \"400px\"); });</script>";
+    //view_execute_script(WEBKIT_WEB_VIEW(webView), "<html><body><h1>My First Heading</h1></body></html>", &msg);
     webkit_web_view_load_uri (WEBKIT_WEB_VIEW (webView), "book:");
-
+    //webkit_web_view_load_html(WEBKIT_WEB_VIEW (webView), script, NULL);
+    
     return FALSE;
+}
+
+static void 
+hello( GtkWidget *widget,
+                   gpointer   data )
+{    
+    g_print ("Hello World\n");
 }
 
 static void
@@ -149,8 +165,22 @@ create ()
 	gtk_window_set_position(GTK_WINDOW(mainWindow), GTK_WIN_POS_CENTER_ALWAYS);
     gtk_window_set_title (GTK_WINDOW (mainWindow), "GNOME Books");
 
+    GtkWidget *button;
+
+    GtkWidget *box;
+
+    button = gtk_button_new_with_label ("Hello World");
+    g_signal_connect (button, "clicked",
+              G_CALLBACK (hello), NULL);
+
+    box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
+
 	webView = WEBKIT_WEB_VIEW(webkit_web_view_new());
-    gtk_container_add (GTK_CONTAINER (mainWindow), GTK_WIDGET(webView));
+    gtk_box_pack_start (GTK_BOX (box), GTK_WIDGET(webView), TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
+    gtk_container_add (GTK_CONTAINER (mainWindow), box);
+    
+    //gtk_container_add (GTK_CONTAINER (mainWindow), GTK_WIDGET(webView));
 
 	WebKitSettings *s = webkit_web_view_get_settings(WEBKIT_WEB_VIEW(webView));
 	

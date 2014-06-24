@@ -3272,7 +3272,7 @@ EPUBJS.Book.prototype.preloadNextChapter = function() {
 
 	next = new EPUBJS.Chapter(this.spine[chap]);
 	if(next) {
-		EPUBJS.core.request(next.absolute);
+		EPUBJS.core.request(next.absolute, 'xml');
 	}
 };
 
@@ -3672,7 +3672,7 @@ EPUBJS.core.request = function(url, type, withCredentials) {
 	if(withCredentials) {
 		xhr.withCredentials = true;
 	}
-  xhr.open("GET", 'book:epub.js' + url, true);
+  xhr.open("GET", url, true);
   //xhr.open("GET", url, true);
   
 	xhr.onreadystatechange = handler;
@@ -5584,7 +5584,7 @@ EPUBJS.Render.Iframe.prototype.load = function(url){
 	var render = this,
 			deferred = new RSVP.defer();
 
-	this.iframe.contentWindow.location.replace('book:epub.js' + url);
+	this.iframe.contentWindow.location.replace(url);
 	// Reset the scroll position
 	render.leftPos = 0;
 
