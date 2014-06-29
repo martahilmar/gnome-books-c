@@ -2,5 +2,6 @@
 <gresources>
   <gresource prefix="gnome-books">
     <file>epub.js/examples/single.html</file>
+    <file>epub.js/examples/pagination.html</file>
   </gresource>
 </gresources>

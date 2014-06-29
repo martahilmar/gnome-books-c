@@ -2799,8 +2799,7 @@ EPUBJS.Book.prototype.urlFrom = function(bookPath){
 		origin = location.origin || location.protocol + "//" + location.host,
 		baseTag = document.getElementsByTagName('base'),
 		base;
-
-
+    
 	//-- Check is Base tag is set
 
 	if(baseTag.length) {
@@ -7105,7 +7104,6 @@ EPUBJS.Unarchiver = function(url){
 	this.urlCache = {};
 	
 	this.zipFs = new zip.fs.FS();
-	
 	return this.promise;
 	
 };
@@ -7129,7 +7127,7 @@ EPUBJS.Unarchiver.prototype.loadLib = function(callback){
 EPUBJS.Unarchiver.prototype.openZip = function(zipUrl, callback){
 	var deferred = new RSVP.defer();
 	var zipFs = this.zipFs;
-	zipFs.importHttpContent('book:epub.js/' + zipUrl, false, function() {
+	zipFs.importHttpContent(zipUrl, false, function() {
 		deferred.resolve(zipFs);
 	}, this.failed);
 	

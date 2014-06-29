@@ -1021,7 +1021,7 @@ EPUBJS.Book.prototype.preloadNextChapter = function() {
 
 	next = new EPUBJS.Chapter(this.spine[chap]);
 	if(next) {
-		EPUBJS.core.request(next.absolute);
+		EPUBJS.core.request(next.absolute, 'xml');
 	}
 };
 
